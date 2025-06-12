@@ -1,4 +1,4 @@
-use kf_emoji_generator::{util::process_files, *};
+use kf_emoji_generator::{Directories, InternalArgs, MyOptions, util::process_files};
 use std::process::ExitCode;
 
 fn main() -> ExitCode {
@@ -12,7 +12,7 @@ fn main() -> ExitCode {
             eprintln!("Error: {err}");
             return ExitCode::FAILURE;
         }
-    };
+    }
 
     let internal_args: InternalArgs = InternalArgs {
         directories,
