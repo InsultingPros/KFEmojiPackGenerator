@@ -44,8 +44,8 @@ pub fn convert_to_tga_par(internal_args: &InternalArgs) -> Result<(), MyErrors> 
                 let dest = internal_args.directories.output.join(new_file_name);
                 if let Err(e) = img.save(dest) {
                     eprintln!("error while saving image: {e}");
-                };
-            };
+                }
+            }
         }
     });
 
@@ -109,8 +109,8 @@ pub fn create_kf_files(files: &Vec<PathBuf>, internal_args: &InternalArgs) -> io
                     ini_writer,
                     r#"SmileyTags=(iconTexture="{cwd}.{file_stem_str}",IconTag="{file_stem_str}",bCaseInsensitive=False)"#
                 )?;
-            };
-        };
+            }
+        }
     }
 
     Ok(())
@@ -129,7 +129,7 @@ pub fn get_dir_files(input: &Path) -> io::Result<Vec<PathBuf>> {
     files.sort();
 
     if files.is_empty() {
-        eprintln!("There are no files in {input:?}! Aborting.");
+        eprintln!("There are no files in {}! Aborting.", input.display());
         Err(Error::from(io::ErrorKind::NotFound))
     } else {
         Ok(files)
