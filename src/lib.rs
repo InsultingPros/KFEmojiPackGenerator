@@ -92,10 +92,8 @@ impl Directories {
         if self.output.exists() {
             // cleanup, in case we have remnants of old runs
             std::fs::remove_dir_all(&self.output)?;
-            std::fs::create_dir(OUTPUT_DIR_NAME)?;
-        } else {
-            std::fs::create_dir(OUTPUT_DIR_NAME)?;
         }
+        std::fs::create_dir(OUTPUT_DIR_NAME)?;
 
         if !self.classes.exists() {
             std::fs::create_dir(CLASS_DIR_NAME)?;
