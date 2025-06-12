@@ -20,14 +20,14 @@ fn copy_files() {
     //     target_input.exists()
     // );
     if let Ok(reference_files) = get_dir_files(reference_input_path) {
-        reference_files.into_iter().for_each(|file| {
+        for file in reference_files {
             if let Some(file_name) = file.file_name() {
                 // println!("{file_name:?}");
                 if let Err(e) = fs::copy(file.as_path(), target_input.join(file_name)) {
                     eprintln!("Error happened while copying files: {e}");
-                };
+                }
             }
-        });
+        }
     } else {
         eprintln!("ops couldn't do anything");
     }
@@ -68,7 +68,7 @@ fn package_name_specified() {
             .status()
             .expect("failed to execute process")
             .success()
-    )
+    );
 }
 
 #[test]
