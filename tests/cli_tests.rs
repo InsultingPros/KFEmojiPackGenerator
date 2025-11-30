@@ -1,4 +1,4 @@
-use assert_cmd::cargo::CommandCargoExt as _;
+use assert_cmd::cargo;
 use kf_emoji_generator::util::get_dir_files;
 use serial_test::serial;
 use std::{fs, path::Path, process::Command};
@@ -37,8 +37,7 @@ fn copy_files() {
 #[serial]
 fn empty_args() {
     assert!(
-        Command::cargo_bin("kf_emoji_generator")
-            .expect("no bin found!")
+        Command::new(cargo::cargo_bin!("kf_emoji_generator"))
             .status()
             .expect("failed to execute process")
             .success()
@@ -49,8 +48,7 @@ fn empty_args() {
 #[serial]
 fn explicit_help_message() {
     assert!(
-        Command::cargo_bin("kf_emoji_generator")
-            .expect("no bin found!")
+        Command::new(cargo::cargo_bin!("kf_emoji_generator"))
             .arg("-h")
             .status()
             .expect("failed to execute process")
@@ -62,8 +60,7 @@ fn explicit_help_message() {
 #[serial]
 fn package_name_specified() {
     assert!(
-        Command::cargo_bin("kf_emoji_generator")
-            .expect("no bin found!")
+        Command::new(cargo::cargo_bin!("kf_emoji_generator"))
             .arg("--package=test")
             .status()
             .expect("failed to execute process")
@@ -75,8 +72,7 @@ fn package_name_specified() {
 #[serial]
 fn no_package_name_specified() {
     assert!(
-        Command::cargo_bin("kf_emoji_generator")
-            .expect("no bin found!")
+        Command::new(cargo::cargo_bin!("kf_emoji_generator"))
             .status()
             .expect("failed to execute process")
             .success()
@@ -87,8 +83,7 @@ fn no_package_name_specified() {
 #[serial]
 fn custom_size() {
     assert!(
-        Command::cargo_bin("kf_emoji_generator")
-            .expect("no bin found!")
+        Command::new(cargo::cargo_bin!("kf_emoji_generator"))
             .arg("--dimensions=48")
             .status()
             .expect("failed to execute process")
@@ -100,8 +95,7 @@ fn custom_size() {
 #[serial]
 fn dxt_mips_masked() {
     assert!(
-        Command::cargo_bin("kf_emoji_generator")
-            .expect("no bin found!")
+        Command::new(cargo::cargo_bin!("kf_emoji_generator"))
             .arg("--dxt=99")
             .arg("--mips=99")
             .arg("--masked=99")
