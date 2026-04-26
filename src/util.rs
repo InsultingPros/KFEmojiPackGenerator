@@ -92,23 +92,23 @@ pub fn create_kf_files(files: &Vec<PathBuf>, internal_args: &InternalArgs) -> io
     };
 
     for file in files {
-        if let Some(file_stem) = file.file_stem() {
-            if let Some(file_stem_str) = file_stem.to_str() {
-                writeln!(
-                    uc_writer,
-                    r"#exec TEXTURE IMPORT FILE={} NAME={} MIPS={} MASKED={} DXT={}",
-                    file.display(),
-                    file_stem_str,
-                    internal_args.cli_args.mips,
-                    internal_args.cli_args.masked,
-                    internal_args.cli_args.dxt
-                )?;
+        if let Some(file_stem) = file.file_stem()
+            && let Some(file_stem_str) = file_stem.to_str()
+        {
+            writeln!(
+                uc_writer,
+                r"#exec TEXTURE IMPORT FILE={} NAME={} MIPS={} MASKED={} DXT={}",
+                file.display(),
+                file_stem_str,
+                internal_args.cli_args.mips,
+                internal_args.cli_args.masked,
+                internal_args.cli_args.dxt
+            )?;
 
-                writeln!(
-                    ini_writer,
-                    r#"SmileyTags=(iconTexture="{cwd}.{file_stem_str}",IconTag="{file_stem_str}",bCaseInsensitive=False)"#
-                )?;
-            }
+            writeln!(
+                ini_writer,
+                r#"SmileyTags=(iconTexture="{cwd}.{file_stem_str}",IconTag="{file_stem_str}",bCaseInsensitive=False)"#
+            )?;
         }
     }
 
